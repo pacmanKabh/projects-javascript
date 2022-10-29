@@ -8,7 +8,7 @@ button.textContent = 'Nuevo número aleatorio';
 // Números aleatorios de 1 hasta 5
 function numberRandom() {
     let numberRandom = Math.floor(Math.random() * 5) + 1;
-    let numberText = document.createElement('label');
+    let numberText = document.createElement('span');
     numberText.textContent = numberRandom;
     listNumberRandom.appendChild(numberText);
 }

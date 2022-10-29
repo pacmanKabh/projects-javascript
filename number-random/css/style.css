@@ -1,0 +1,27 @@
+:root {
+    --ff--primary: 'Roboto', sans-serif;
+    --clr-black: #222222;
+    --clr-white: #ffffff;
+    --radius: 0.5rem;
+    --spacing: 0.25rem;
+}
+
+.btn {
+    background: transparent;
+    border-radius: var(--radius);
+    border-color: var(--clr-black);
+    box-shadow: 5px 9px 5px #2222223b;
+    color: var(--clr-black);
+    cursor: pointer;
+    font-family: var(--ff--primary);
+    font-size: 1rem;
+    font-weight: 900;
+    padding: 0.75rem 1.25rem;
+    letter-spacing: var(--spacing);
+    text-transform: uppercase;
+}
+
+.btn:hover {
+    background: var(--clr-black);
+    color: var(--clr-white);
+}
