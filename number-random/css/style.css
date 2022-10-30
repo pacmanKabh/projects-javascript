@@ -4,6 +4,7 @@
     --clr-black: #222222;
     --clr-white: #ffffff;
     --clr-green: #2ed550;
+    --clr-warning: #d5c62e;
     --radius: 0.5rem;
     --spacing: 0.25rem;
     --font-bold-900: 900;
@@ -78,5 +79,5 @@ section {
     text-transform: uppercase;
     font-weight: var(--font-bold-900);
     letter-spacing: var(--spacing);
-    background: var(--clr-green);
+    background: var(--clr-warning);
 }

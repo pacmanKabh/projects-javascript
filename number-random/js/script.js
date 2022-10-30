@@ -3,16 +3,23 @@ let container = document.querySelector('.container');
 let description = document.querySelector('.description');
 let listNumberRandom = document.querySelector('.listNumberRandom');
 
-description.textContent = "Genera números aleatorios de 1 hasta 5.";
-
-// Botón para generar número aleatorio
-let numberRandomButton = document.createElement('button');
-numberRandomButton.textContent = 'Generar número aleatorio';
-numberRandomButton.classList.add('btn');
-container.append(numberRandomButton);
-
+let numberRandomButton;
 let resetGameButton;
 let messageFinal;
+
+//Iniciando el juego
+newGame();
+
+// Iniciar juego
+function newGame() {
+    description.textContent = "Genera números aleatorios de 1 hasta 5.";
+
+    numberRandomButton = document.createElement('button');
+    numberRandomButton.textContent = 'Generar número aleatorio';
+    numberRandomButton.classList.add('btn');
+    container.append(numberRandomButton);
+    numberRandomButton.addEventListener('click', numberRandom);
+}
 
 // Números aleatorios de 1 hasta 5
 function numberRandom() {
@@ -28,7 +35,7 @@ function maxNumberRandom() {
     let countNumberRandom = document.querySelectorAll('.listNumberRandom span');
     
     if (countNumberRandom.length > 4) {
-        numberRandomButton.style.display = 'none';
+        numberRandomButton.remove();
 
         resetGameButton = document.createElement('button');
         resetGameButton.classList.add('btn');
@@ -39,7 +46,18 @@ function maxNumberRandom() {
         messageFinal.textContent = '¡LLegamos al final del juego!';
 
         container.append(messageFinal, resetGameButton);
+
+        resetGameButton.addEventListener('click', resetGame);
     }
 }
 
-numberRandomButton.addEventListener('click', numberRandom);
+// Reiniciar juego
+function resetGame() {
+    let countNumberRandom = document.querySelectorAll('.listNumberRandom span');
+    for (let i = 0; i < countNumberRandom.length; i++) {
+        document.querySelector('span').remove();
+    }
+    document.querySelector('.messageFinal').remove();
+    document.querySelector('button').remove();
+    newGame();
+}
