@@ -1,12 +1,10 @@
 // Diseño html
 let container = document.querySelector('.container');
-let description = document.querySelector('.description');
-let listNumberRandom = document.querySelector('.listNumberRandom');
-
-let numberRandomButton;
-let resetGameButton;
-let predictionButton;
-let listPrediction;
+let description;
+let inputPrediction;
+let listNumberPrediction;
+let listNumberRandom;
+let button;
 let message;
 
 //Iniciando el juego
@@ -14,51 +12,64 @@ newGame();
 
 // Nuevo juego
 function newGame() {
+    description = document.createElement('p');
+    description.classList.add('.description');
     description.textContent = "Genera números aleatorios de 1 al 5, para iniciar el juego debes hacer una predicción de los 5 números y escribirlo juntos.";
 
-    let inputPrediction = document.createElement('input');
+    inputPrediction = document.createElement('input');
     inputPrediction.setAttribute('type', 'text');
     inputPrediction.setAttribute('placeholder', 'Ejem: 34251');
-    inputPrediction.classList.add('numberPrediction');
-    description.append(document.createElement('br'));
-    description.append(inputPrediction);
+    inputPrediction.setAttribute('id', 'numberPrediction');
 
-    predictionButton = document.createElement('button');
-    predictionButton.textContent = 'Enviar Predicción';
-    predictionButton.classList.add('btn');
-    container.append(predictionButton);
+    listNumberPrediction = document.createElement('div');
+    listNumberPrediction.setAttribute('id', 'listNumberPrediction');
+    listNumberPrediction.classList.add('containerNumber');
 
-    description.append(document.createElement('br'));
-    predictionButton.addEventListener('click',predictionNumberRandom);
+    button = document.createElement('button');
+    button.textContent = 'Enviar Predicción';
+    button.classList.add('btn');
+
+    container.append(description, inputPrediction, listNumberPrediction, button);
+
+    button.addEventListener('click',predictionNumberRandom);
 }
 
 // Predicciones de los números aleatorios 
 function predictionNumberRandom() {
     clearMessage();
-    listPrediction = document.createElement('span');
+    let numberText = document.createElement('span');
     
-    let numberPrediction = document.querySelector('.numberPrediction');
+    let numberPrediction = document.querySelector('#numberPrediction');
 
     if (numberPrediction.value != '') {
         if (numberPrediction.value.length < 5) {
-            description.append(newMessage({
+            container.insertBefore(newMessage({
                 msj: 'Error insertar 5 números',
-                clr: 'danger'
-            }));
+                clr: 'red'
+            }), button);
+
         } else if (numberPrediction.value.length > 5) {
-            description.append(newMessage({
+            container.insertBefore(newMessage({
                 msj: 'Error superaste el máximo de números',
-                clr: 'danger'
-            }));
+                clr: 'red'
+            }), button);
+
         } else {
-            listPrediction.textContent = numberPrediction.value;
-            description.append(listPrediction);
+            numberText.textContent = numberPrediction.value;
+            listNumberPrediction.appendChild(numberText);
+
+            let countPrediction = document.querySelectorAll('#listNumberPrediction span');
+            if (countPrediction.length == 3) {
+                container.removeChild(inputPrediction);
+                button.remove();
+                startGame();
+            }
         }
     } else {
-        description.append(newMessage({
+        container.insertBefore(newMessage({
             msj: 'Ingresar un valor',
-            clr: 'danger'
-        }));
+            clr: 'red'
+        }), button);
     }
 }
 
@@ -81,14 +92,16 @@ function clearMessage() {
 
 // Iniciando juego
 function startGame() {
-    document.querySelector('button').remove();
+    listNumberRandom = document.createElement('div');
+    listNumberRandom.setAttribute('id', 'listNumberRandom');
+    listNumberRandom.classList.add('containerNumber');
 
-    numberRandomButton = document.createElement('button');
-    numberRandomButton.textContent = 'Generar número aleatorio';
-    numberRandomButton.classList.add('btn');
-    container.append(numberRandomButton);
+    button = document.createElement('button');
+    button.textContent = 'Generar número aleatorio';
+    button.classList.add('btn');
+    container.append(listNumberRandom, button);
 
-    numberRandomButton.addEventListener('click', numberRandom);
+    button.addEventListener('click', numberRandom);
 }
 
 // Números aleatorios de 1 hasta 5
@@ -102,33 +115,30 @@ function numberRandom() {
 
 // Cantidad máxima de numeros aleatorios generados
 function maxNumberRandom() {
-    let countNumberRandom = document.querySelectorAll('.listNumberRandom span');
+    let countNumberRandom = document.querySelectorAll('#listNumberRandom span');
     
     if (countNumberRandom.length > 4) {
-        numberRandomButton.remove();
+        button.remove();
 
-        resetGameButton = document.createElement('button');
-        resetGameButton.classList.add('btn');
-        resetGameButton.textContent = 'Volver iniciar el Juego'
+        button = document.createElement('button');
+        button.classList.add('btn');
+        button.textContent = 'Volver iniciar el Juego';
 
-        message = document.createElement('p');
-        message.classList.add('message');
-        message.classList.add('warning');
-        message.textContent = '¡LLegamos al final del juego!';
+        container.append(newMessage({
+            msj: '¡LLegamos al final del juego!',
+            clr: 'yellow'
+        }), button);
 
-        container.append(message, resetGameButton);
-
-        resetGameButton.addEventListener('click', resetGame);
+        button.addEventListener('click', resetGame);
     }
 }
 
 // Reiniciar juego
 function resetGame() {
-    let countNumberRandom = document.querySelectorAll('.listNumberRandom span');
-    for (let i = 0; i < countNumberRandom.length; i++) {
-        document.querySelector('span').remove();
-    }
-    document.querySelector('.message').remove();
-    document.querySelector('button').remove();
+    container.removeChild(description);
+    container.removeChild(listNumberPrediction);
+    container.removeChild(listNumberRandom);
+    container.removeChild(message);
+    container.removeChild(button);
     newGame();
 }
