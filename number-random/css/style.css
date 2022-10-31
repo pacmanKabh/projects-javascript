@@ -5,6 +5,7 @@
     --clr-white: #ffffff;
     --clr-green: #2ed550;
     --clr-warning: #d5c62e;
+    --clr-danger: #d52e4d;
     --radius: 0.5rem;
     --spacing: 0.25rem;
     --font-bold-900: 900;
@@ -72,12 +73,19 @@ section {
     color: var(--clr-white);
 }
 
-.messageFinal {
+.message {
     font-size: 1rem;
     padding: 1em;
     border-radius: var(--radius);
     text-transform: uppercase;
     font-weight: var(--font-bold-900);
     letter-spacing: var(--spacing);
+}
+
+.warning {
     background: var(--clr-warning);
+}
+
+.danger {
+    background: var(--clr-danger);
 }
