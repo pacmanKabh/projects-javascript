@@ -3,9 +3,10 @@
     --ff-secondary: "Open Sans", sans-serif;
     --clr-black: #222222;
     --clr-white: #ffffff;
-    --clr-green: #2ed550;
-    --clr-warning: #d5c62e;
-    --clr-danger: #d52e4d;
+    --clr-red: #EB5353;
+    --clr-yellow: #F9D923;
+    --clr-green: #36AE7C;
+    --clr-blue: #187498;
     --radius: 0.5rem;
     --spacing: 0.25rem;
     --font-bold-900: 900;
@@ -23,20 +24,37 @@ section {
     width: 80%;
     margin: auto;
     display: flex;
-    align-items: center;
     flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
     justify-content: center;
+    align-items: center;
 }
 
-.listNumberRandom {
+.containerNumber {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
     margin: 1rem;
 }
 
-.listNumberRandom span {
+#listNumberPrediction span {
+    font-size: 2rem;
+    font-weight: var(--font-bold-900);
+    margin: 1rem;
+    padding: 0.4em;
+    width: 3em;
+    height: 1em;
+    border-radius: 50%;
+    background: var(--clr-black);
+    color: var(--clr-white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#listNumberRandom span {
     font-size: 3rem;
     font-weight: var(--font-bold-900);
     margin: 1rem;
@@ -50,6 +68,19 @@ section {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+input {
+    border-radius: var(--radius);
+    border-color: var(--clr-black);
+    box-shadow: 5px 9px 5px #2222223b;
+    color: var(--clr-black);
+    font-family: var(--ff-primary);
+    font-size: 1rem;
+    font-weight: var(--font-bold-900);
+    padding: 0.75rem 1.25rem;
+    letter-spacing: var(--spacing);
+    text-align: center;
 }
 
 .btn {
@@ -82,10 +113,22 @@ section {
     letter-spacing: var(--spacing);
 }
 
-.warning {
-    background: var(--clr-warning);
+.yellow {
+    background: var(--clr-yellow);
 }
 
-.danger {
-    background: var(--clr-danger);
+.red {
+    background: var(--clr-red);
+}
+
+.blue {
+    background: var(--clr-blue);
+}
+
+.green {
+    background: var(--clr-green);
+}
+
+.black {
+    background: var(--clr-black);
 }
