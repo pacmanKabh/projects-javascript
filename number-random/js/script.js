@@ -2,6 +2,7 @@
 let container = document.querySelector('.container');
 let description;
 let inputPrediction;
+let numberPrediction;
 let listNumberPrediction;
 let listNumberRandom;
 let button;
@@ -30,6 +31,7 @@ function newGame() {
     button.classList.add('btn');
 
     container.append(description, inputPrediction, listNumberPrediction, button);
+    inputPrediction.focus();
 
     button.addEventListener('click',predictionNumberRandom);
 }
@@ -38,8 +40,9 @@ function newGame() {
 function predictionNumberRandom() {
     clearMessage();
     let numberText = document.createElement('span');
+    numberText.classList.add('spanPrediction', 'green');
     
-    let numberPrediction = document.querySelector('#numberPrediction');
+    numberPrediction = document.querySelector('#numberPrediction');
 
     if (numberPrediction.value != '') {
         if (numberPrediction.value.length < 5) {
@@ -47,18 +50,19 @@ function predictionNumberRandom() {
                 msj: 'Error insertar 5 números',
                 clr: 'red'
             }), button);
+            limpiarInput();
 
         } else if (numberPrediction.value.length > 5) {
             container.insertBefore(newMessage({
                 msj: 'Error superaste el máximo de números',
                 clr: 'red'
             }), button);
+            limpiarInput();
 
         } else {
             numberText.textContent = numberPrediction.value;
             listNumberPrediction.appendChild(numberText);
-            numberPrediction.value = '';
-            numberPrediction.focus();
+            limpiarInput();
 
             let countPrediction = document.querySelectorAll('#listNumberPrediction span');
             if (countPrediction.length == 3) {
@@ -72,6 +76,7 @@ function predictionNumberRandom() {
             msj: 'Ingresar un valor',
             clr: 'red'
         }), button);
+        limpiarInput();
     }
 }
 
@@ -92,6 +97,12 @@ function clearMessage() {
     }
 }
 
+// Limpiar input
+function limpiarInput() {
+    numberPrediction.value = '';
+    numberPrediction.focus();
+}
+
 // Iniciando juego
 function startGame() {
     listNumberRandom = document.createElement('div');
@@ -110,6 +121,7 @@ function startGame() {
 function numberRandom() {
     let numberRandom = Math.floor(Math.random() * 5) + 1;
     let numberText = document.createElement('span');
+    numberText.classList.add('spanRandom', 'blue');
     numberText.textContent = numberRandom;
     listNumberRandom.appendChild(numberText);
     maxNumberRandom();
