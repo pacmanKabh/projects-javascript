@@ -14,7 +14,7 @@ newGame();
 function newGame() {
     description = document.createElement('p');
     description.classList.add('.description');
-    description.textContent = "Genera números aleatorios de 1 al 5, para iniciar el juego debes hacer una predicción de los 5 números y escribirlo juntos.";
+    description.textContent = "El juego genera cinco números aleatorios del 1 al 5, pero antes de iniciar el juego debes hacer una predicción de los 5 números debes escribirlo juntos. (Cuentas con 3 predicciones)";
 
     inputPrediction = document.createElement('input');
     inputPrediction.setAttribute('type', 'text');
@@ -57,6 +57,8 @@ function predictionNumberRandom() {
         } else {
             numberText.textContent = numberPrediction.value;
             listNumberPrediction.appendChild(numberText);
+            numberPrediction.value = '';
+            numberPrediction.focus();
 
             let countPrediction = document.querySelectorAll('#listNumberPrediction span');
             if (countPrediction.length == 3) {
