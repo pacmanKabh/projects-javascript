@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Nerko+One&display=swap');
+
+:root {
+    --ff-primary: 'Roboto', sans-serif;
+    --ff-secondary: 'Nerko One', cursive;
+    --clr-black: #222222;
+    --clr-white: #ffffff;
+    /* Degradado blue */
+    --clr-1: #00fff6;
+    --clr-2: #00e7ff;
+    --clr-3: #009eff;
+    --clr-4: #0014ff;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: var(--ff-secondary);
+}
+
+section {
+    height: 100vh;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
